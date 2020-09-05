@@ -1,49 +1,30 @@
-// server/server.js
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const app = express();
-const port = 8000;
+var Connection = require('tedious').Connection;
+var Request = require('tedious').Request;
+var TYPES = require('tedious').TYPES;
 
-app.use(bodyParser.json());
-app.use(cors());
-app.use(express.urlencoded({
-  extended: true
-}));
+require('dotenv').config()
 
-app.get('/', (req, res) => {
-  res.send(`Hi! Server is listening on port ${port}`)
-});
-
-let events = [{
-    id: 1,
-    name: 'Charity Ball',
-    category: 'Fundraising',
-    description: 'Spend an elegant night of dinner and dancing with us as we raise money for our new rescue farm.',
-    featuredImage: 'https://placekitten.com/500/500',
-    images: [
-      'https://placekitten.com/500/500',
-      'https://placekitten.com/500/500',
-      'https://placekitten.com/500/500',
-    ],
-    location: '1234 Fancy Ave',
-    date: '12-25-2019',
-    time: '11:30'
+var config = {
+  server: process.env.DB_HOST,
+  authentication: {
+    type: 'default',
+    options: {
+      userName: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD
+    }
   },
-  {
-    id: 2,
-    name: 'Rescue Center Goods Drive',
-    category: 'Adoptions',
-    description: 'Come to our donation drive to help us replenish our stock of pet food, toys, bedding, etc. We will have live bands, games, food trucks, and much more.',
-    featuredImage: 'https://placekitten.com/500/500',
-    images: [
-      'https://placekitten.com/500/500'
-    ],
-    location: '1234 Dog Alley',
-    date: '11-21-2019',
-    time: '12:00'
+  options: {
+    database: process.env.DB_NAME,
+    encrypt: false
   }
-];
+}
+var connection = new Connection(config);
 
-// listen on the port
-app.listen(port);
+// Attempt to connect and execute queries if connection goes through
+connection.on('connect', function (err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('Connected !!!');
+  }
+});
