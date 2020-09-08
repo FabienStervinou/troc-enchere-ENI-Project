@@ -1,12 +1,18 @@
 <template>
   <div class="home">
-    <h1>Welcome home !</h1>
+    <HomeFilter />
+    <HomeCard />
   </div>
 </template>
 
 <script>
+import HomeFilter from "../components/HomeFilter.vue";
+import HomeCard from "../components/HomeCard.vue";
 export default {
   name: "Home",
-  components: {}
+  components: {
+    HomeFilter,
+    HomeCard
+  }
 };
 </script>

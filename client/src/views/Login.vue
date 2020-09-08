@@ -4,12 +4,12 @@
       <form action="POST">
         <section>
           <div class="flex-between">
-            <label for="name">Identifiant</label>
-            <input type="text" name="name" />
+            <label for="username">Identifiant</label>
+            <input required v-model="username" type="text" name="username" />
           </div>
           <div class="flex-between">
-            <label for="name">Mot de passe</label>
-            <input type="password" name="password" autocomplete="on" />
+            <label for="password">Mot de passe</label>
+            <input required v-model="password" type="password" name="password" autocomplete="on" />
           </div>
         </section>
         <section class="flex-row">
@@ -31,6 +31,10 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {};
+</script>
 
 <style lang="scss">
 .login-form {
