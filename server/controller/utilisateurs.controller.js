@@ -31,7 +31,7 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-
+  //todo
 };
 
 exports.findOne = (req, res) => {
