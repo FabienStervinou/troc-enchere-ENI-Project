@@ -1,30 +1,44 @@
-var Connection = require('tedious').Connection;
-var Request = require('tedious').Request;
-var TYPES = require('tedious').TYPES;
+var express = require("express");
+var bodyParser = require("body-parser");
+var cors = require("cors");
 
-require('dotenv').config()
+require("dotenv").config();
 
-var config = {
-  server: process.env.DB_HOST,
-  authentication: {
-    type: 'default',
-    options: {
-      userName: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD
-    }
-  },
-  options: {
-    database: process.env.DB_NAME,
-    encrypt: false
-  }
-}
-var connection = new Connection(config);
+var app = express();
 
-// Attempt to connect and execute queries if connection goes through
-connection.on('connect', function (err) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('Connected !!!');
-  }
+var corsOptions = {
+  origin: "http://localhost:8081",
+};
+
+app.use(cors(corsOptions));
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+
+const db = require("./models");
+// db.sequelize.sync();
+// DO "DROP TABLE IF EXIST" before
+db.sequelize
+  .sync({
+    force: true,
+  })
+  .then(() => {
+    console.log("Drop and re-sync db.");
+  });
+
+app.get("/", (req, res) => {
+  res.json({
+    message: "Welcome to TrocEnchère App",
+  });
+});
+
+require("./routes/utilisateur.routes")(app);
+
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
