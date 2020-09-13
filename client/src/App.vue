@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <nav class="container">
-      <router-link :to="{name: 'root'}" exact class="nav-item logo">ENI-Enchères</router-link>
-      <router-link :to="{name: 'login'}" class="nav-item">Se connecter</router-link>
+      <router-link :to="{ name: 'root' }" exact class="nav-item logo">ENI-Enchères</router-link>
+      <router-link :to="{ name: 'login' }" class="nav-item">Se connecter</router-link>
     </nav>
     <router-view></router-view>
   </div>
