@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
-  const Utilisateurs = sequelize.define("utilisateurs", {
-    no_utilisateur: {
+  const Utilisateur = sequelize.define("utilisateur", {
+    userId: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       primaryKey: true,
@@ -31,7 +31,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING(30)
     },
     code_postal: {
-      type: Sequelize.STRING(10)
+      type: Sequelize.INTEGER(10)
     },
     ville: {
       type: Sequelize.STRING(30)
@@ -43,9 +43,11 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.INTEGER
     },
     administrateur: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TINYINT
     }
+  }, {
+    timestamps: false
   });
 
-  return Tutorial;
+  return Utilisateur;
 };
