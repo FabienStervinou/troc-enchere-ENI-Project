@@ -1,7 +1,11 @@
 <template>
   <nav class="container">
-    <div class="nav-item logo">ENI-Enchères</div>
-    <div class="nav-item">Se connecter</div>
+    <div class="nav-item logo">
+      ENI-Enchères
+    </div>
+    <div class="nav-item">
+      Se connecter
+    </div>
   </nav>
 </template>
 

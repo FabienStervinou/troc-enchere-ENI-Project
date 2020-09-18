@@ -1,8 +1,15 @@
-<template>
+<template>  
   <div class="container-filter">
-    <form action="#" method="GET" class="form-filter flex-row">
+    <form 
+      action="#" 
+      method="GET" 
+      class="form-filter flex-row">
+      
       <div class="half-w flex-col">
-        <label for="search" class="label-filter">
+
+        <label 
+          for="search" 
+          class="label-filter">
           Filtres :
           <input
             type="text"
@@ -10,9 +17,15 @@
             placeholder="Nom de l'article contient"
           />
         </label>
-        <label for="categories" class="filter-label">
+
+        <label 
+          for="categories" 
+          class="filter-label">
           Catégorie :
-          <input name="categorie" list="categorie" />
+          <input 
+            name="categorie" 
+            list="categorie" />
+
           <datalist id="categorie">
             <option value="Mobilier" />
             <option value="Informatique" />
@@ -20,10 +33,17 @@
             <option value="Mode" />
             <option value="Jeux vidéo" />
           </datalist>
+
         </label>
+
       </div>
       <div class="half-w">
-        <input type="submit" value="Rechercher" class="btn btn-search" />
+
+        <input 
+          type="submit" 
+          value="Rechercher" 
+          class="btn btn-search" />
+
       </div>
     </form>
   </div>

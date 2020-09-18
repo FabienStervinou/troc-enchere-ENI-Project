@@ -8,7 +8,16 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      items: {
+        id: Number,
+        title: String
+      }
+    };
+  }
+};
 </script>
 
 <style lang="scss">
