@@ -2,7 +2,7 @@ const db = require("../models");
 const Utilisateur = db.utilisateurs;
 const Op = db.Sequelize.Op;
 
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
   // Validate request
   if (!req.body.pseudo) {
     res.status(400).send({
@@ -22,10 +22,11 @@ exports.create = (req, res) => {
     rue: req.body.rue,
     code_postal: req.body.code_postal,
     ville: req.body.ville,
-    mot_de_passe: req.body.mot_de_passe,
+    password: req.body.password,
     credit: req.body.credit,
     administrateur: req.body.administrateur,
   };
+
 
   // Save Utilisateur in the database
   Utilisateur.create(utilisateur)

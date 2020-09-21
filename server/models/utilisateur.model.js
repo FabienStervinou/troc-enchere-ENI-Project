@@ -1,9 +1,13 @@
+const bcrypt = require('bcrypt');
+
 module.exports = (sequelize, Sequelize) => {
   const Utilisateur = sequelize.define("utilisateur", {
     userId: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       primaryKey: true,
+      unique: true,
+      allowNull: false,
       validate: {
         is: ["[0-9]", "i"],
       }
@@ -13,12 +17,15 @@ module.exports = (sequelize, Sequelize) => {
     },
     nom: {
       type: Sequelize.STRING(30),
-    },
+      allowNull: true,
+    },  
     prenom: {
       type: Sequelize.STRING(30),
+      allowNull: true,
     },
     email: {
       type: Sequelize.STRING(20),
+      unique: true,
       validate: {
         isEmail: true,
       }
@@ -28,25 +35,50 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: true,
     },
     rue: {
-      type: Sequelize.STRING(30)
+      type: Sequelize.STRING(30),
+      allowNull: true,
     },
     code_postal: {
-      type: Sequelize.INTEGER(10)
+      type: Sequelize.INTEGER(10),
+      allowNull: true,
     },
     ville: {
-      type: Sequelize.STRING(30)
+      type: Sequelize.STRING(30),
+      allowNull: true,
     },
-    mot_de_passe: {
-      type: Sequelize.STRING(30)
+    password: {
+      type: Sequelize.STRING,
     },
     credit: {
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
     },
     administrateur: {
-      type: Sequelize.TINYINT
+      type: Sequelize.TINYINT,
+      defaultValue: 0,
+    },
+    createdAt: {
+      type: Sequelize.DATE,
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
     }
   }, {
-    timestamps: false
+      freezeTableName: true,
+      timestamps: false,
+  });
+  
+  Utilisateur.beforeCreate((utilisateur, options) => {
+
+    return bcrypt.hash(utilisateur.password, 10)
+      .then(hash => {
+        utilisateur.password = hash;
+      })
+      .catch(err => {
+        throw new Error();
+      });
   });
 
   return Utilisateur;
