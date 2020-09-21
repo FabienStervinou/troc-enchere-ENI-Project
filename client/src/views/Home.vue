@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import HomeFilter from "../components/HomeFilter.vue";
-import HomeCard from "../components/HomeCard.vue";
+import HomeFilter from '../components/HomeFilter.vue';
+import HomeCard from '../components/HomeCard.vue';
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     HomeFilter,
     HomeCard
