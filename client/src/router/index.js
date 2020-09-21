@@ -1,12 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Login from "../views/Login.vue";
-// import User from "../views/User.vue";
+import Login from "../components/Login.vue";
+import User from "../components/User.vue";
 
 Vue.use(VueRouter);
 
-const routes = [{
+const routes = [
+  {
     path: "/",
     name: "root",
     component: Home
@@ -16,11 +17,11 @@ const routes = [{
     name: "login",
     component: Login
   },
-  // {
-  //   path: "user:id(\\d+)",
-  //   name: "user",
-  //   component: User
-  // },
+  {
+    path: "user:id",
+    name: "user",
+    component: User
+  },
   {
     path: "*",
     redirect: "/"
