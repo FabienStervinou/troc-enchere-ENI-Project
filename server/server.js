@@ -2,6 +2,8 @@ require("dotenv").config();
 var express = require("express");
 var bodyParser = require("body-parser");
 var cors = require("cors");
+const cookieParser = require('cookie-parser');
+
 
 var app = express();
 
@@ -16,6 +18,9 @@ app.use(
     extended: true,
   })
 );
+
+app.use(cookieParser());
+// app.use(customAuthMiddleware);
 
 const db = require("./models");
 // db.sequelize.sync();
