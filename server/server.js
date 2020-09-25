@@ -1,48 +1,27 @@
-require("dotenv").config();
-var express = require("express");
-var bodyParser = require("body-parser");
-var cors = require("cors");
-const cookieParser = require('cookie-parser');
+//Import
+const express = require('express');
+const bodyParser = require('body-parser');
+const apiRouter = require('./apiRouter').router;
 
+require('dotenv').config()
 
-var app = express();
+//Instantiate server 
+var server = express();
 
-var corsOptions = {
-  origin: "http://localhost:8081",
-};
+//Body-parser configuration 
+server.use(bodyParser.urlencoded({ extended: true }));
+server.use(bodyParser.json());
 
-app.use(cors(corsOptions));
-app.use(bodyParser.json());
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
-
-app.use(cookieParser());
-// app.use(customAuthMiddleware);
-
-const db = require("./models");
-// db.sequelize.sync();
-// DO "DROP TABLE IF EXIST" before
-db.sequelize
-  .sync({
-    force: true,
-  })
-  .then(() => {
-    console.log("Drop and re-sync db.");
-  });
-
-app.get("/", (req, res) => {
-  res.json({
-    message: "Welcome to TrocEnchère App",
-  });
+//Configure routes 
+server.get('/', function (req, res) {
+  res.setHeader('Content-Type', 'text/html');
+  res.status(200).send('<h1>Welcome to my server</h1>')
 });
 
-require("./routes/utilisateur.routes")(app);
+server.use('/api/', apiRouter);
 
-const PORT = process.env.PORT || 8080;
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+//Launch server 
+const PORT = 3000
+server.listen(PORT, function () {
+  console.log(`Server listen on ${PORT}`)
+})
