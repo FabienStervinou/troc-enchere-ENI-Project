@@ -142,5 +142,66 @@ module.exports = {
     }).catch(function (err) {
       res.status(500).json({ 'error': 'cannot fetch user' });
     });
+  },
+  updateUserProfil: function(req, res) {
+    var headerAuth = req.headers['authorization'];
+    var userId = jwtUtils.getUserId(headerAuth);
+
+    var firstname = req.body.firstname;
+    var lastname = req.body.lastname;
+    var street = req.body.street;
+    var postalCode = req.body.postalCode;
+    var city = req.body.city;
+    var phone = req.body.phone;
+    var credit = req.body.credit;
+
+    asyncWaterfall.waterfall([
+      function (done) {
+        models.User.findOne({
+            attributes: ['id', 'firstname', 'lastname', 'street', 'postalCode', 'city', 'phone', 'credit'],
+            where: {
+              id: userId
+            }
+          }).then(function (userFound) {
+            done(null, userFound);
+          })
+          .catch(function (err) {
+            return res.status(500).json({
+              'error': 'Unable to verify user'
+            });
+          });
+      },
+      function (userFound, done) {
+        if (userFound) {
+          userFound.update({
+            firstname: (firstname ? firstname : userFound.firstname),
+            lastname: (lastname ? lastname : userFound.lastname),
+            street: (street ? street : userFound.street),
+            postalCode: (postalCode ? postalCode : userFound.postalCode),
+            city: (city ? city : userFound.city),
+            phone: (phone ? phone : userFound.phone),
+            credit: (credit ? credit : userFound.credit)
+          }).then(function () {
+            done(userFound);
+          }).catch(function (err) {
+            res.status(500).json({
+              'error': 'Cannot update user'
+            });
+          });
+        } else {
+          res.status(404).json({
+            'error': 'user not found'
+          });
+        }
+      },
+    ], function (userFound) {
+      if (userFound) {
+        return res.status(201).json(userFound);
+      } else {
+        return res.status(500).json({
+          'error': 'cannot update user profile'
+        });
+      }
+    });
   }
 }
