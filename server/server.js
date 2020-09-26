@@ -15,7 +15,7 @@ server.use(bodyParser.json());
 //Configure routes 
 server.get('/', function (req, res) {
   res.setHeader('Content-Type', 'text/html');
-  res.status(200).send('<h1>Welcome to my server</h1>')
+  res.status(200).send('<h1>Welcome on Troc Enchere server</h1>')
 });
 
 server.use('/api/', apiRouter);
