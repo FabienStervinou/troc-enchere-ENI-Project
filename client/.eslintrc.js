@@ -1,7 +1,8 @@
 module.exports = {
   root: true,
   env: {
-    browser: true
+    browser: true,
+    node: true
   },
   extends: ["plugin:vue/strongly-recommended", "eslint:recommended"],
   plugins: ["vue"],
@@ -16,7 +17,7 @@ module.exports = {
       {
         singleline: 1,
         multiline: {
-          max: 1,
+          max: 4,
           allowFirstLine: false
         }
       }
