@@ -12,12 +12,18 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: Home,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: Login,
+    meta: {
+      requiresVisitor: true 
+    }
   },
   {
     path: '/logout',
@@ -27,7 +33,10 @@ const routes = [
   {
     path: '/register',
     name: 'register',
-    component: Register
+    component: Register,
+    meta: {
+      requiresVisitor: true
+    }
   },
   {
     path: '/user:id',
