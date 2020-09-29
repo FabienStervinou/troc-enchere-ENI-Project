@@ -2,7 +2,7 @@
 const bcrypt = require('bcrypt');
 const jwtUtils = require('../utils/jwt.utils'); 
 const models = require('../models');
-const asyncWaterfall = require('async');
+const asyncWaterfall = require('async');  
 
 // Regex
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -86,6 +86,11 @@ module.exports = {
         return res.status(500).json({ 'error': 'Unable to verify user' + err });
       });
 
+  },
+  logout: function (req, res) { 
+    return res.status(200).json({
+      'loggedIn': 'false'
+    });
   },
   login: function(req, res) {
 
