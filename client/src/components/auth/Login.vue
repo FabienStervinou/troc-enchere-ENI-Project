@@ -66,6 +66,18 @@ export default {
         email: '',
         password: '',
     }
+  },
+  methods: {
+    login() {
+      this.$store.dispatch('retrieveToken', {
+        email: this.email,
+        password: this.password
+      })
+      .then(response => {
+        console.log(response)
+        this.$router.push({ name: 'home' })
+      })
+    }
   }
 };
 </script>
