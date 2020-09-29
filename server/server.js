@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const apiRouter = require('./apiRouter').router;
+const cors = require('cors');
 
 require('dotenv').config()
 
@@ -11,6 +12,14 @@ var server = express();
 //Body-parser configuration 
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
+
+//Cors config
+server.use(
+  cors({
+    origin: "http://localhost:8080",
+    credentials: true,
+  })
+);
 
 //Configure routes 
 server.get('/', function (req, res) {
