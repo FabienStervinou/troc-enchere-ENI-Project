@@ -21,6 +21,24 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    destroyToken(context) { 
+      if (context.getters.loggedIn) {
+        return new Promise((resolve, reject) => {
+          axios.post('/users/logout')
+            .then(response => {
+              localStorage.removeItem('access_token')
+              context.commit('destroyToken')
+              resolve(response)
+            })
+            .catch(err => {
+              //In case inject key on localStorage
+              localStorage.getItem('access_token')
+              context.commit('destroyToken')
+              reject(err)
+            })
+        })
+      } 
+    },
     retrieveToken(context, credentials) {
       return new Promise((resolve, reject) => {
         axios.post('/users/login', {
