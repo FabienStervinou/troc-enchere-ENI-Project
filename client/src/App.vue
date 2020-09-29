@@ -12,18 +12,21 @@
       <div class="separator"></div>
 
       <router-link 
+        v-if="!loggedIn"
         :to="{ name: 'login' }" 
         class="nav-item"
       >
         Se connecter
       </router-link>
       <router-link 
+        v-if="!loggedIn"
         :to="{ name: 'register' }" 
         class="nav-item"
       >
         S'enregistrer
       </router-link>
       <router-link 
+        v-if="loggedIn"
         :to="{ name: 'logout' }" 
         class="nav-item"
       >
@@ -36,7 +39,11 @@
 
 <script>
 export default {
-
+  computed: {
+    loggedIn() {
+      return this.$store.getters.loggedIn
+    }
+  }
 };
 </script>
 
