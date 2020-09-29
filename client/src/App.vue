@@ -1,11 +1,33 @@
 <template>
   <div id="app">
     <nav class="container">
-      <router-link :to="{ name: 'root' }" exact class="nav-item logo">
+      <router-link 
+        :to="{ name: 'home' }" 
+        exact 
+        class="nav-item logo"
+      >
         ENI-Enchères
       </router-link>
-      <router-link :to="{ name: 'login' }" class="nav-item">
+
+      <div class="separator"></div>
+
+      <router-link 
+        :to="{ name: 'login' }" 
+        class="nav-item"
+      >
         Se connecter
+      </router-link>
+      <router-link 
+        :to="{ name: 'register' }" 
+        class="nav-item"
+      >
+        S'enregistrer
+      </router-link>
+      <router-link 
+        :to="{ name: 'logout' }" 
+        class="nav-item"
+      >
+        Déconnexion
       </router-link>
     </nav>
     <router-view />
@@ -14,7 +36,7 @@
 
 <script>
 export default {
-  components: {}
+
 };
 </script>
 
@@ -89,6 +111,10 @@ nav {
   display: flex;
   background-color: rgb(81, 202, 152);
   justify-content: space-between;
+
+  .separator {
+    flex-grow: 4;
+  }
 
   .nav-item {
     display: flex;
