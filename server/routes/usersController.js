@@ -99,7 +99,7 @@ module.exports = {
     var password = req.body.password;
 
     if (email == null || password == null) {
-      return res.status(400).json({ 'error': 'emaail or password is empty' });
+      return res.status(400).json({ 'error': 'email or password is empty' });
     }
     //TODO verify email regex and password lenght force
 

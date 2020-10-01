@@ -21,6 +21,21 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    register(context, data) {
+      return new Promise((resolve, reject) => {
+        axios.post('/users/register', {
+          username: data.username,
+          email: data.email,
+          password: data.password,
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
     destroyToken(context) { 
       if (context.getters.loggedIn) {
         return new Promise((resolve, reject) => {
