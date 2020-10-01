@@ -1,6 +1,10 @@
 <template>
   <div class="card-container flex-row">
-    <div v-for="item in items" :key="item.id" class="card flex-">
+    <div
+      v-for="item in items"
+      :key="item.id"
+      class="card flex-"
+    >
       {{ item.id }}
       {{ item.title }}
     </div>

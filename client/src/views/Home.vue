@@ -9,7 +9,7 @@
 import HomeFilter from '../components/HomeFilter.vue';
 import HomeCard from '../components/HomeCard.vue';
 export default {
-  name: 'Home',
+  name: 'home',
   components: {
     HomeFilter,
     HomeCard

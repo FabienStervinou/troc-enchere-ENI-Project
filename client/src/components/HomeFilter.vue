@@ -3,28 +3,30 @@
     <form 
       action="#" 
       method="GET" 
-      class="form-filter flex-row">
-      
+      class="form-filter flex-row"
+    >
       <div class="half-w flex-col">
-
         <label 
           for="search" 
-          class="label-filter">
+          class="label-filter"
+        >
           Filtres :
           <input
             type="text"
             name="search"
             placeholder="Nom de l'article contient"
-          />
+          >
         </label>
 
         <label 
           for="categories" 
-          class="filter-label">
+          class="filter-label"
+        >
           Catégorie :
           <input 
             name="categorie" 
-            list="categorie" />
+            list="categorie"
+          >
 
           <datalist id="categorie">
             <option value="Mobilier" />
@@ -35,15 +37,13 @@
           </datalist>
 
         </label>
-
       </div>
       <div class="half-w">
-
         <input 
           type="submit" 
           value="Rechercher" 
-          class="btn btn-search" />
-
+          class="btn btn-search"
+        >
       </div>
     </form>
   </div>

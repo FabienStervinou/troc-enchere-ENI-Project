@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import axios from 'axios'
-import config from '@/../config'
+// import config from '../config/index'
 
 const HEADER_ACCESS_NAME = 'Authorization'
 
 const headers = {
-  'Content-Type': 'application/json'
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Access-Control-Allow-Origin': '*',
 }
 
 const instance = axios.create({
@@ -15,14 +16,14 @@ const instance = axios.create({
 
 const getAccessToken = () => '<YOUR_TOKEN>'
 
-// instance.interceptors.request.use(
-//   async config => {
-//     const accessToken = getAccessToken()
-//     if (accessToken) config.headers[HEADER_ACCESS_NAME] = `Bearer ${accessToken}`
-//     return config
-//   },
-//   error => Promise.reject(error)
-// )
+instance.interceptors.request.use(
+  async config => {
+    const accessToken = getAccessToken()
+    if (accessToken) config.headers[HEADER_ACCESS_NAME] = `Bearer ${accessToken}`
+    return config
+  },
+  error => Promise.reject(error)
+)
 
 instance.interceptors.response.use(
   response => response,
