@@ -1,15 +1,11 @@
 <template>
   <div id="app">
     <nav class="container">
-      <router-link 
-        :to="{ name: 'home' }" 
-        exact 
-        class="nav-item logo"
-      >
+      <router-link :to="{ name: 'home' }" exact class="nav-item logo">
         ENI-Enchères
       </router-link>
 
-      <div class="separator"></div>
+      <div class="separator" />
 
       <router-link 
         v-if="!loggedIn"
@@ -18,6 +14,7 @@
       >
         Se connecter
       </router-link>
+
       <router-link 
         v-if="!loggedIn"
         :to="{ name: 'register' }" 
@@ -25,6 +22,15 @@
       >
         S'enregistrer
       </router-link>
+
+      <router-link 
+        v-if="loggedIn"
+        :to="{ name: 'addItem' }" 
+        class="nav-item"
+      >
+        Vendre un article 
+      </router-link>
+
       <router-link 
         v-if="loggedIn"
         :to="{ name: 'logout' }" 

@@ -5,6 +5,7 @@ import Login from '../components/auth/Login.vue';
 import Logout from '../components/auth/Logout.vue';
 import Register from '../components/auth/Register.vue';
 import User from '../components/User.vue';
+import addItem from '../components/addItem.vue';
 
 Vue.use(VueRouter);
 
@@ -42,6 +43,11 @@ const routes = [
     path: '/user:id',
     name: 'user',
     component: User
+  },
+  {
+    path: '/item/',
+    name: 'addItem',
+    component: addItem
   },
   {
     path: '*',
