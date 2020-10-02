@@ -1,6 +1,7 @@
 // Imports
 const express = require('express');
 const usersCtrl = require('./routes/usersController');
+const itemCtrl = require('./routes/itemsController');
 
 // Router
 exports.router = (function () {
@@ -12,6 +13,9 @@ exports.router = (function () {
   apiRouter.route('/users/logout/').post(usersCtrl.logout);
   apiRouter.route('/users/profile/').get(usersCtrl.getUserProfile);
   apiRouter.route('/users/profile/').put(usersCtrl.updateUserProfil);
+
+  // Items routes
+  apiRouter.route('/item/').post(itemCtrl.createItem);
 
   return apiRouter;
 })();
