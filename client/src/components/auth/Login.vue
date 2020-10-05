@@ -49,9 +49,11 @@
         </div>
       </section>
       <section>
-        <button class="btn btn-register">
-          Créer un compte
-        </button>
+        <div class="btn btn-register">
+          <router-link to="/register">
+            Créer un compte
+          </router-link>
+        </div>
       </section>
     </form>
   </div>
