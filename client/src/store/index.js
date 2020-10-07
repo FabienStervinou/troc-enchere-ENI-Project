@@ -11,11 +11,15 @@ export default new Vuex.Store({
   state: {
     token: localStorage.getItem('access_token') || null,
     users: [],
+    userId: null,
     item: []
   },
   mutations: {
     retrieveToken(state, token) {
       state.token = token
+    },
+    retrieveUserId(state, userId) {
+      state.userId = userId
     },
     destroyToken(state) {
       state.token = null  
@@ -66,8 +70,10 @@ export default new Vuex.Store({
         })
           .then(response => {
             const token = response.data.token
+            const userId = response.data.userId
 
             localStorage.setItem('access_token', token)
+            context.commit('retrieveUserId', userId)
             context.commit('retrieveToken', token)
             resolve(response)
           })
