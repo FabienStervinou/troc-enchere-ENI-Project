@@ -10,7 +10,8 @@ axios.defaults.baseURL = 'http://localhost:3000/api';
 export default new Vuex.Store({
   state: {
     token: localStorage.getItem('access_token') || null,
-    users: []
+    users: [],
+    item: []
   },
   mutations: {
     retrieveToken(state, token) {
@@ -19,9 +20,12 @@ export default new Vuex.Store({
     destroyToken(state) {
       state.token = null  
     },
+    createItem(state, item) {
+      state.item = item
+    }
   },
   actions: {
-    register(context, data) {
+    register(context, data) { 
       return new Promise((resolve, reject) => {
         axios.post('/users/register', {
           username: data.username,
@@ -68,9 +72,27 @@ export default new Vuex.Store({
             resolve(response)
           })
           .catch(err => {
-            console.log(err)
             reject(err)
           })
+      })
+    }, 
+    createItem(context, credentials) {
+      return new Promise((resolve, reject) => {
+        axios.post('/item/', {
+          nameItem: credentials.nameItem,
+          description: credentials.description,
+          startDateAuction: credentials.startDateAuction,
+          endDateAuction: credentials.endDateAuction,
+          startingPrice: credentials.startingPrice,
+          sellPrice: credentials.startingPrice,
+          statePrice: 0,
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(err => {
+            reject(err)
+        })
       })
     }
   },
