@@ -1,8 +1,9 @@
 <template>
-    <div class="login-form flex-center">
-    <form 
+  <div class="login-form flex-center">
+    <form
       class="login" 
-      @submit.prevent="register">
+      @submit.prevent="register"
+    >
       <section>
         <div class="flex-between">
           <label for="username">Identifiant</label>
@@ -34,7 +35,10 @@
         </div>
       </section>
       <section>
-        <button class="btn btn-register">
+        <button 
+          class="btn btn-register" 
+          type="submit"
+        >
           Créer un compte
         </button>
       </section>
@@ -64,8 +68,7 @@ export default {
         return response
       })
       .catch(err => {
-        console.log(err)
-        console.log(err.message)
+        return err
       })
     }
   }
