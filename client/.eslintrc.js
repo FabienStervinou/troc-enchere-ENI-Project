@@ -12,16 +12,16 @@ module.exports = {
   rules: {
     // ESLINT RULES
     // "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
-    "vue/max-attributes-per-line": [
-      "error",
-      {
-        singleline: 1,
-        multiline: {
-          max: 4,
-          allowFirstLine: false
-        }
-      }
-    ],
+    // "vue/max-attributes-per-line": [
+    //   "error",
+    //   {
+    //     singleline: 1,
+    //     multiline: {
+    //       max: 4,
+    //       allowFirstLine: false
+    //     }
+    //   }
+    // ],
     quotes: ["error", "single"]
   }
 };
