@@ -6,27 +6,35 @@ Vue.use(Vuex);
 
 axios.defaults.baseURL = 'http://localhost:3000/api';
 
-
 export default new Vuex.Store({
   state: {
     token: localStorage.getItem('access_token') || null,
     users: [],
-    userId: null,
-    item: []
+    userId: parseInt(localStorage.getItem('userId')) || null,
+    item: [],
   },
   mutations: {
+    //Item
+    retrieveItem(state, item) {
+      state.item = item
+    },
+    createItem(state, item) {
+      state.item = item
+    },
+    //Token
     retrieveToken(state, token) {
       state.token = token
-    },
-    retrieveUserId(state, userId) {
-      state.userId = userId
     },
     destroyToken(state) {
       state.token = null  
     },
-    createItem(state, item) {
-      state.item = item
-    }
+    //UserId
+    retrieveUserId(state, userId) {
+      state.userId = userId
+    },
+    destroyUserId(state) {
+      state.userId = null
+    },
   },
   actions: {
     register(context, data) { 
@@ -50,7 +58,9 @@ export default new Vuex.Store({
           axios.post('/users/logout')
             .then(response => {
               localStorage.removeItem('access_token')
+              localStorage.removeItem('userId')
               context.commit('destroyToken')
+              context.commit('destroyUserId')
               resolve(response)
             })
             .catch(err => {
@@ -73,6 +83,7 @@ export default new Vuex.Store({
             const userId = response.data.userId
 
             localStorage.setItem('access_token', token)
+            localStorage.setItem('userId', userId)
             context.commit('retrieveUserId', userId)
             context.commit('retrieveToken', token)
             resolve(response)
@@ -84,7 +95,7 @@ export default new Vuex.Store({
     }, 
     createItem(context, credentials) {
       return new Promise((resolve, reject) => {
-        axios.post('/item/', {
+        axios.post('/item', {
           nameItem: credentials.nameItem,
           description: credentials.description,
           startDateAuction: credentials.startDateAuction,
@@ -92,8 +103,12 @@ export default new Vuex.Store({
           startingPrice: credentials.startingPrice,
           sellPrice: credentials.startingPrice,
           statePrice: 0,
+          userId: credentials.userId,
         })
           .then(response => {
+            console.log('createItem store <<<<<<<<<<<<<', response)
+            const item = response.data
+            context.commit('retrieveItem', item),
             resolve(response)
           })
           .catch(err => {
@@ -105,6 +120,9 @@ export default new Vuex.Store({
   getters: {
     loggedIn(state) {
       return state.token !== null
+    },
+    userId(state) {
+      return parseInt(state.userId)
     },
   },
   modules: {}
