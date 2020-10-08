@@ -52,6 +52,9 @@ module.exports = {
       statePrice: {
         type: Sequelize.TINYINT
       },
+      userId: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

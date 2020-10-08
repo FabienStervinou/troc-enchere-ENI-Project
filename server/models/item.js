@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Item.belongsTo(models.User);
+      Item.belongsTo(models.User, { foreignKey: 'userId' });
       Item.hasMany(models.Auction);
       Item.belongsTo(models.Category);
       Item.hasOne(models.Removal);
@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     endDateAuction: DataTypes.DATE,
     startingPrice: DataTypes.INTEGER,
     sellPrice: DataTypes.INTEGER,
-    statePrice: DataTypes.TINYINT
+    statePrice: DataTypes.TINYINT,
+    userId: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Item',
