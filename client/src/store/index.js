@@ -106,7 +106,6 @@ export default new Vuex.Store({
           userId: credentials.userId,
         })
           .then(response => {
-            console.log('createItem store <<<<<<<<<<<<<', response)
             const item = response.data
             context.commit('retrieveItem', item),
             resolve(response)
