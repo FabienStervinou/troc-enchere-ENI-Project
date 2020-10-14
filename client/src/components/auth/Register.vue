@@ -5,34 +5,27 @@
       @submit.prevent="register"
     >
       <section>
-        <div class="flex-between">
-          <label for="username">Identifiant</label>
-          <input
-            required
-            v-model="username"
-            type="text"
-            name="username"
-          >
-        </div>
-        <div class="flex-between">
-          <label for="email">Email</label>
-          <input
-            required
-            v-model="email"
-            type="email"
-            name="email" 
-          >
-        </div>
-        <div class="flex-between">
-          <label for="password">Mot de passe</label>
-          <input
-            required
-            v-model="password"
-            type="password"
-            name="password" 
-            autocomplete="on"
-          >
-        </div>
+        
+        <InputText
+          v-model="username"
+          label="Identifiant"
+          @keydown.enter="search"
+        />
+
+        <InputText
+          v-model="email"
+          label="Email"
+          type="email"
+          @keydown.enter="search"
+        />
+
+        <InputText
+          v-model="password"
+          label="Mot de passe"
+          type="password"
+          @keydown.enter="search"
+        />
+        
       </section>
       <section>
         <button 
@@ -47,8 +40,13 @@
 </template>
 
 <script>
+import InputText from '../utils/InputText';
+
 export default {
   name: 'register',
+  components: {
+    InputText
+  },
   data() {
     return {
         username: '',
@@ -71,14 +69,14 @@ export default {
         return err
       })
     }
-  }
+  },
 }
 </script>
 
 <style lang="scss">
 .login-form {
   form {
-    width: 350px;
+    width: 450px;
 
     section {
       min-height: 75px;
@@ -103,7 +101,7 @@ export default {
   text-decoration: underline;
 
   &:hover {
-    color: #51ca98;
+    color: $primary_color;
   }
 }
 
