@@ -16,6 +16,7 @@ exports.router = (function () {
 
   // Items routes
   apiRouter.route('/item/').post(itemCtrl.createItem);
+  apiRouter.route('/items/').get(itemCtrl.findRecentItems);
   apiRouter.route('/item/:userId/').get(itemCtrl.findItemByUserId);
 
   return apiRouter;
